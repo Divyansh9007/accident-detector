@@ -7,7 +7,7 @@ import torch
 st.title("🚨 Accident Detection with YOLOv8")
 
 # Load YOLO model
-raw_model = torch.load('best.pt', weights_only=False)
+raw_model = torch.load('best.pt',map_location=torch.device('cpu'), weights_only=False)
 
 # Wrap it in YOLO if needed
 model = YOLO(raw_model)
