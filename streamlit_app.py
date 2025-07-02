@@ -3,11 +3,14 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 from PIL import Image
-
+import torch
 st.title("🚨 Accident Detection with YOLOv8")
 
 # Load YOLO model
-model = YOLO("best.pt")
+raw_model = torch.load('best.pt', weights_only=False)
+
+# Wrap it in YOLO if needed
+model = YOLO(raw_model)
 
 # File uploader
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
