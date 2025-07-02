@@ -67,10 +67,10 @@ with tab2:
             results = model(frame)
             for result in results:
                 for box in result.boxes:
-                    cls = int(box.cls[0])
-                    conf = float(box.conf[0])
+                    cls = int(box.cls.cpu().numpy()[0])
+                    conf = float(box.conf.cpu().numpy()[0])
                     if cls == 0 and conf > 0.5:
-                        x1, y1, x2, y2 = map(int, box.xyxy[0])
+                        x1, y1, x2, y2 = map(int, box.xyxy.cpu().numpy()[0])
                         label = f"Accident: {conf:.2f}"
                         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
                         cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
